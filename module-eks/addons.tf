@@ -8,7 +8,7 @@
 
 
 provider "helm" {
-    kubernetes = {
+    kubernetes {
         host                   = aws_eks_cluster.eks.endpoint
         cluster_ca_certificate = base64decode(aws_eks_cluster.eks.certificate_authority[0].data)
         token                  = data.aws_eks_cluster_auth.eks.token
@@ -37,8 +37,16 @@ resource "helm_release" "nginx_ingress" {
     depends_on = [ aws_eks_node_group.eks_node_group ]
 }
 
+# data "aws_lb" "nginx_ingress" {
+#   tags = {
+#     "kubernetes.io/service-name" = "ingress-nginx/nginx-ingress-ingress-nginx-controller"
+#   }
+
+#   depends_on = [helm_release.nginx_ingress]
+# }
+
 data "aws_lb" "nginx_ingress" {
-  tags = {
+  tags = {                       # ← this one is CORRECT — tags IS an argument, = is right here
     "kubernetes.io/service-name" = "ingress-nginx/nginx-ingress-ingress-nginx-controller"
   }
 
