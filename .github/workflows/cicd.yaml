@@ -1,0 +1,105 @@
+name: Deploy to AWS with terraform
+
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu latest  # terraform
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+    steps:
+      - name: checkout repository.
+        uses: actions/checkout@v2
+
+      # - name: setup Github OIDC
+      #   run: |
+          
+
+
+
+      # - name: configure AWS credentials using OIDC
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: ${{secrets.AWS_GITHUB_ROLE}} 
+      #     aws-region: ${{secres.AWS_REGION}}
+      #     audience: sts get-caller-identity
+      # - run: aws sts get-caller-identity
+
+
+
+      - name: configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            # removed role-to-assume as requested
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # - name: 'install TFLint'  
+      #   run: |
+      #     curl
+
+      #     ./tflint --version  
+
+      - name: 'install tfsec for security scanning'
+        run: |
+          curl -sSL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+          tfsec --version
+
+         
+          
+          
+          
+
+      - name: 'terraform init'
+        run: terraform init
+
+      - name: 'terraform format' 
+        run: terraform fmt 
+
+      - name: 'terraform validate'
+        run: terraform validate
+
+      # - name: 'TFLint'  
+      #   run: |
+      #     ./tflint --init
+      #     ./tflint       
+      
+      - name: 'tfsec'
+        run: tfsec . || true
+
+      - name: 'terraform plan'
+        run: terraform plan
+
+    #   - name: 'terraform apply'
+    #     run: terraform apply --auto-approve
+
+    #   - name: 'install kubectl'
+    #     run: |
+    #       curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    #       chmod +x ./kubectl
+    #       sudo mv ./kubectl /usr/local/bin/kubectl 
+          
+    #   - name: 'authenticate to  EKS cluster'
+    #     run: aws eks update-kubeconfig --name production-eks-cluster --region us-east-1
+
+    #   - name: 'deploying the ClusterIssuer to EKS'
+    #     run: kubectl apply -f ClusterIssuer.yaml
+
+    #   - name: deploying argocd ingress rule to EKS 
+    #     run: kubectl apply -f ingress-argocd.yaml -n argocd       
+
+      # - name: 'terraform destroy'
+      #   run: terraform destroy --auto-approve

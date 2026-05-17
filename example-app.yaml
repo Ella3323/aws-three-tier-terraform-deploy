@@ -45,10 +45,10 @@ spec:
   ingressClassName: external-nginx
   tls:
   - hosts:
-    - app.cloudwitches.online
-    secretName: app-cloudwitches-online
+    - app.cohort5pod12.site
+    secretName: app-cohort5pod12-site
   rules:
-  - host: app.cloudwitches.online
+  - host: app.cohort5pod12.site
     http:
       paths:
       - path: /

@@ -1,7 +1,9 @@
 terraform {
   backend "s3" {
-    bucket = "digitalwitchngbucketcloud1"
-    key    = "digitalwitchng/prodution/terraform.tfstate"
-    region = "us-west-1"
+    bucket         = "pod12-cohort5-digitalwitch"
+    key            = "bankapp/production/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
   }
 }
