@@ -12,9 +12,9 @@ spec:
   tls:
   - hosts:
     - argocd.cohort5pod12.site
-    secretName: argocd-cohort5pod12-site
+    secretName: argocd-ellengold.online
   rules:
-  - host: argocd.cohort5pod12.site
+  - host: argocd.ellengold.online
     http:
       paths:
       - path: /

@@ -1,12 +1,11 @@
 terraform {
-  required_version = "~> 1.15"
+  required_version = ">= 1.5"
 
-  cloud {
-    
-    organization = "Pod12-cohort5-digitalwitch"
-
-    workspaces {
-      name = "BankApp-Project"
-    }
+  backend "s3" {
+    bucket         = "ellengold-terraform-state"
+    key            = "bankapp/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "ellengold-terraform-lock"
+    encrypt        = true
   }
 }

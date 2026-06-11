@@ -7,7 +7,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: Cloud.nginx12@gmail.com
+    email: Cloud.ellengold.online
     privateKeySecretRef:
       name: letsencrypt-prod-cluster-issuer
     solvers:

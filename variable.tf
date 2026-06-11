@@ -2,14 +2,14 @@ variable "vpc_cidrblock" {
   description = "CIDR block for the VPC"
   type        = string
   default     = "192.168.0.0/16"
-  
+
 }
 
 variable "environment" {
   description = "Environment name (e.g., dev, staging, prod)"
   type        = string
   default     = "staging"
-  
+
 }
 
 variable "create_subnet" {
@@ -22,7 +22,7 @@ variable "countsub" {
   description = "Number of subnets to create"
   type        = number
   default     = 2
-  
+
 }
 variable "create_elastic_ip" {
   description = "Flag to create Elastic IPs"
@@ -46,14 +46,14 @@ variable "max_size" {
 variable "min_size" {
   description = "Minimum size of the EKS node group"
   type        = number
-  default     = 2 
+  default     = 2
 }
 
 variable "instance_types" {
   description = "Instance types for the EKS node group"
   type        = list(string)
-  default     = ["t3.small"]    
-} 
+  default     = ["t3.small"]
+}
 
 variable "capacity_type" {
   description = "Capacity type for the EKS node group"
@@ -92,7 +92,7 @@ variable "domain-name" {
 # variable "namecheap_api_user" {
 #   description = "Namecheap API user"
 #   type        = string
-#   default     = "smartobi"
+#   default     = "ellengold.online"
 # }
 # variable "namecheap_api_key" {
 #   description = "Namecheap API key"
@@ -102,7 +102,7 @@ variable "domain-name" {
 # variable "namecheap_username" {
 #   description = "Namecheap username"
 #   type        = string
-#   default     = "smartobi"
+#   default     = "ellengold.online"
 # }
 # variable "namecheap_client_ip" {
 #   description = "Client IP for Namecheap API access"
@@ -115,7 +115,7 @@ variable "domain-name" {
 variable "db_instance_class" {
   description = "Instance class for the RDS database"
   type        = string
-  default     = "db.t3.micro" 
+  default     = "db.t3.micro"
 }
 
 variable "db_allocated_storage" {
@@ -139,7 +139,7 @@ variable "db_username" {
 variable "db_password" {
   description = "Password for the database"
   type        = string
-  default     = "password123"
+  default     = "Favour23"
   sensitive   = true
 }
 
@@ -158,11 +158,11 @@ variable "repository_name" {
   description = "Name of the ECR repository"
   type        = string
   default     = "eks-repository"
-  
+
 }
 
 variable "email" {
   description = "Email address for notifications and certificates"
   type        = string
-  default     = "cloud.nginx12@gmail.com"
+  default     = "ezeotikapamela@gmail.com"
 }

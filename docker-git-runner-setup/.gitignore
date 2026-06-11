@@ -1,0 +1,3 @@
+docker-git-runner-setup/.env
+terraform.tfvars
+.terraform

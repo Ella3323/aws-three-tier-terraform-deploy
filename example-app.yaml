@@ -45,10 +45,10 @@ spec:
   ingressClassName: external-nginx
   tls:
   - hosts:
-    - app.cohort5pod12.site
-    secretName: app-cohort5pod12-site
+    - app.ellengold.online
+    secretName: app-ellengold.online
   rules:
-  - host: app.cohort5pod12.site
+  - host: app.ellengold.online
     http:
       paths:
       - path: /
