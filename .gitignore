@@ -5,3 +5,4 @@
 *.tfvars
 crash.log
 override.tf
+docker-git-runner-setup/.env
