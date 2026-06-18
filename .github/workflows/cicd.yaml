@@ -17,7 +17,7 @@ jobs:
       TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
     steps:
       - name: checkout repository.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # - name: setup Github OIDC
       #   run: |
