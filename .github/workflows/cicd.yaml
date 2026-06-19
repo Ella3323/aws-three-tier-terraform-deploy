@@ -92,6 +92,13 @@ jobs:
       - name: 'authenticate to  EKS cluster'
         run: aws eks update-kubeconfig --name production-eks-cluster --region us-east-1
 
+    
+      - name: 'install cert-manager'
+        run: |
+                  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.2/cert-manager.yaml
+                  kubectl wait --for=condition=Available --timeout=300s deployment/cert-manager -n cert-manager
+                  kubectl wait --for=condition=Available --timeout=300s deployment/cert-manager-webhook -n cert-manager
+
       - name: 'deploying the ClusterIssuer to EKS'
         run: kubectl apply -f ClusterIssuer.yaml
 
