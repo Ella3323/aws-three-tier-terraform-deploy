@@ -53,11 +53,10 @@ jobs:
 
       #     ./tflint --version  
 
-      - name: 'install tfsec for security scanning'
-        run: |
-          curl -sSL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-          tfsec --version
-
+      - name: 'Run tfsec security scan'
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          soft_fail: true
          
           
           
@@ -77,9 +76,7 @@ jobs:
       #     ./tflint --init
       #     ./tflint       
       
-      - name: 'tfsec'
-        run: tfsec . || true
-
+      
       - name: 'terraform plan'
         run: terraform plan
 
