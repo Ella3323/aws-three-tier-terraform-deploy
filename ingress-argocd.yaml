@@ -11,7 +11,7 @@ spec:
   ingressClassName: external-nginx
   tls:
   - hosts:
-    - argocd.cohort5pod12.site
+    - argocd.ellengold.online
     secretName: argocd-ellengold.online
   rules:
   - host: argocd.ellengold.online
